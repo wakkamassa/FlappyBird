@@ -293,10 +293,16 @@ class GameScene: SKScene,SKPhysicsContactDelegate{
                 
             }
             
-        }else if(contact.bodyA.categoryBitMask & itemCategory ) == itemCategory || (contact.bodyB.categoryBitMask & itemCategory) == itemCategory{
+        }else if(contact.bodyA.categoryBitMask & itemCategory ) == itemCategory{
             self.run(actionMusic)
-            let remove = SKAction.removeFromParent()
-            item.run(remove)
+            contact.bodyA.node?.removeFromParent()
+            itemScore += 1
+            itemScoreLabelNode.text = "APPLE:\(itemScore)"
+            
+            
+        }else if(contact.bodyB.categoryBitMask & itemCategory) == itemCategory{
+            self.run(actionMusic)
+            contact.bodyB.node?.removeFromParent()
             itemScore += 1
             itemScoreLabelNode.text = "APPLE:\(itemScore)"
             
